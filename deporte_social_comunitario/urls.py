@@ -13,9 +13,31 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+
+# coding=utf-8
+from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.views.generic import RedirectView
+from django.conf import settings 
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^usuarios/', include('usuarios.urls')),
+    url('', RedirectView.as_view(url='usuarios',permanent=True)),
 ]
+
+urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+
+
+
+"""
+Los mapeos URL estan gestionados por la variable urlpatterns
+que es una lista de python de funciones path()
+cada funcion path() asocia un patron URL a una vista 
+especifica
+
+"""
+
+
