@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Local Library Home</h1>
+
+  <p>Bienvenido <em>Usuarios</em>, Versión 1.0 de nuestro Sitio Web</p>
+
+<h2>Contenido Dinámico</h2>
+
+  <p>Se encuentran los siguientes datos:</p>
+  <ul>
+    <li><strong>Municipios:</strong> {{ num_municipios }}</li>
+    <li><strong>Usuarios:</strong> {{ num_usuarios }}</li>
+  </ul>
+
+{% endblock %}
