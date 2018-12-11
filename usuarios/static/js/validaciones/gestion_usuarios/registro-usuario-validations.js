@@ -1,0 +1,131 @@
+form = "#usuario-form";
+fields = {
+
+    first_name: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        }
+    },
+    last_name: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        }
+    },
+    username: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        }
+    },
+    password: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        },
+        identical: {
+            field: 'confirm_password',
+            message: 'Las contraseñas no coinciden entre si'
+        }
+
+    },
+    confirm_password: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            },
+            identical: {
+                field: 'password',
+                message: 'Las contraseñas no coinciden entre si'
+            }
+        }
+    },
+    telefono: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        }
+    },
+    direccion: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        }
+    },
+    genero: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        }
+    },
+    tipo_id: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        }
+    },
+    identificacion: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            }
+        }
+    },
+    fecha_nacimiento: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            },
+            date: {
+                message: 'El valor ingresado no es una fecha válida, debe ser menor a la fecha actual',
+                format: 'YYYY-MM-DD',
+                max: function(field, validator){
+                    var d = new Date();
+
+                    var curr_date = d.getDate();
+
+                    var curr_month = d.getMonth() + 1;
+
+                    var curr_year = d.getFullYear();
+                    return curr_year + "-" + curr_month + "-" + curr_date;
+
+                }
+            }
+        }
+    },
+    email: {
+        validators: {
+            notEmpty: {
+                message: MENSAJE_VACIO
+            },
+            emailAddress: {
+                message: "El correo ingresado no es un correo válido. ejemplo: ejemplo@ejemplo.com"
+            }
+        }
+    },
+    foto: {
+        validators: {
+            file: {
+                message: "Por favor seleccione un archivo de imagen jpg, jpeg, png, válido",
+                extension: "jpg,png,jpeg",
+                type: "image/jpeg,image/png"
+            }
+        }
+    }
+};
+
+
+//Revalidar campos al ser actualizados
+$("#id_fecha_nacimiento").on('change',function(e){
+    $("#usuario-form").formValidation('revalidateField', 'fecha_nacimiento');
+});
+$.getScript(base+"js/validaciones/validations-base.js");

@@ -1,16 +1,25 @@
 {% extends "base_generic.html" %}
-
+{% load staticfiles %}
 {% block content %}
-<h1>Local Library Home</h1>
+{% load bootstrap3%}
+{% load staticfiles %}
 
-  <p>Bienvenido <em>Usuarios</em>, Versión 1.0 de nuestro Sitio Web</p>
+
+{% block titulo %}
+	<h2>Deporte social comunitario</h2>
+{% endblock %}
+
+
+  <p>Bienvenidos <em>Usuarios</em>, Versión 1.0 de nuestro Sitio Web</p>
 
 <h2>Contenido Dinámico</h2>
 
   <p>Se encuentran los siguientes datos:</p>
   <ul>
     <li><strong>Municipios:</strong> {{ num_municipios }}</li>
-    <li><strong>Usuarios:</strong> {{ num_usuarios }}</li>
+    <li><strong>Departamentos:</strong> {{ num_Departamento }}</li>
+    <li><strong>Ciudades:</strong> {{ num_Ciudad }}</li>
+    <li><strong>Paises:</strong> {{ num_Pais }}</li>
   </ul>
 
 {% endblock %}

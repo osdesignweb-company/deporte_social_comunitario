@@ -32,6 +32,9 @@ urlpatterns+=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 
 
 
+admin.site.site_header = 'Deporte Social Comunitario Administracion'
+admin.site.site_title = 'Deporte Social Comunitario Administracion'
+
 """
 Los mapeos URL estan gestionados por la variable urlpatterns
 que es una lista de python de funciones path()

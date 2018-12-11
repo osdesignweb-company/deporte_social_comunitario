@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap3',
+    'datetimewidget',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -83,9 +85,9 @@ DATABASES = {
         #'NAME': os.path.join(BASE_DIR, 'coldeportes'),
         'NAME': os.path.join(BASE_DIR, 'coldeportes'),
         #'USER': 'srvadmin',
-        #'PASSWORD': 'DBc0ld3p0rtes',
+        #'PASSWORD': 'DBc0ld3p0rt3s',
         #'HOST': 'localhost',
-        #'PORT': '5433',
+        #'PORT': '5432',
     }
 }
 
