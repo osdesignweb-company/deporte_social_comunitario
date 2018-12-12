@@ -83,10 +83,11 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'coldeportes'),
-        'NAME': os.path.join(BASE_DIR, 'coldeportes'),
-        #'USER': 'srvadmin',
-        #'PASSWORD': 'DBc0ld3p0rt3s',
-        #'HOST': 'localhost',
+        #'NAME': os.environ.get('DB_NAME','gncguhmh'),
+        'NAME': os.environ.get('DB_NAME','coldeportes'),
+        #'USER': os.environ.get('DB_USER','gncguhmh'),
+        #'PASSWORD': os.environ.get('DB_PASS','UxkipGn6TOB6l4YoakEYiUs0wqHIQo5S'),
+        #'HOST': 'stampy.db.elephantsql.com',
         #'PORT': '5432',
     }
 }

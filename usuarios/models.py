@@ -21,7 +21,7 @@ TIPO_GENERO = (
     (1, 'Femenino'),
     (2, 'Masculino'),
 )
-
+ 
 class Municipio(models.Model):
 	nombre = models.CharField(max_length=255,verbose_name='nombre')
 	codigo = models.CharField(max_length=10,null=True, verbose_name='código')

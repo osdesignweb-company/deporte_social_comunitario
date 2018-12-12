@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from django.views import generic 
+from .forms import MunicipioFormulario
 # Create your views here.
 
 from .models import *
@@ -24,4 +25,7 @@ def index(request):
 
 
 
-
+def Municipio_new(request):
+	form=MunicipioFormulario()
+	return render(request, 'Municipio_list.html',{'form':form})
+	
