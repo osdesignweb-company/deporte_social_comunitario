@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic 
-from .forms import MunicipioFormulario
+from .forms import MunicipioFormulario, PerfilUsuarioFormulario
 # Create your views here.
 
 from .models import *
@@ -23,9 +23,29 @@ def index(request):
 					'num_Pais':num_municipios},	
 	)
 
-
-
 def Municipio_new(request):
 	form=MunicipioFormulario()
 	return render(request, 'Municipio_list.html',{'form':form})
+
+
+
+def PerfilUsuario_view(request):
+	form = PerfilUsuarioFormulario()
+	return render(request, 'Perfil_usuario.html',{'form':form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	

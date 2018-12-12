@@ -10,10 +10,10 @@
 {% endblock %}
 
 
-  <p>Bienvenidos <em>Usuarios</em>, Versión 1.0 de nuestro Sitio Web</p>
+<p>Bienvenidos <em>Usuarios</em>, Versión 1.0 de nuestro Sitio Web</p>
 
 <h2>Contenido Dinámico</h2>
-<a href="{% url 'Municipio' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+
 
   <p>Se encuentran los siguientes datos:</p>
   <ul>
@@ -23,4 +23,14 @@
     <li><strong>Paises:</strong> {{ num_Pais }}</li>
   </ul>
 
+
+
+
+<h1>Formularios</h1>
+<ul>
+<li><a href="{% url 'Municipio' %}" class="down-menu"><span class="glyphicon glyphicon-plus">Municipios</span></a></li>
+
+<li><a href="{% url 'Perfil_usuario' %}" class="down-menu"><span class="glyphicon glyphicon-plus">Perfil de usuario</span></a></li>
+</ul>
 {% endblock %}
+

@@ -2,72 +2,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-
+  {% block meta %}
+  {% endblock %}
   <meta charset="utf-8">
-  
-
+  <title>{% block titulo %}SIND-Coldeportes{% endblock %}</title>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
   <meta content="" name="description" />
   <meta content="Cedesoft" name="author" />
   <script src="{% static 'plugins/jquery/jquery-2.1.1.js' %}"></script>
   <script src="{% static 'js/personalizado/constantes.js' %}"></script>
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-
-  <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
-    {#<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">#}
-    <link href="{% static 'plugins/jquery-ui/themes/base/minified/jquery-ui.min.css' %}" rel="stylesheet" />
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/style.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/style-responsive.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/theme/default.css' %}" rel="stylesheet" id="theme" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/personal.css' %}">
-    <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.css' %}"/>
-    <link href="{% static 'plugins/ionicons/css/ionicons.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'frontend/css/base.css' %}" rel="stylesheet">
-    
-    <link href="{% static 'css/select2.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/jquery.datetimepicker.css' %}" rel="stylesheet">
-    <style type="text/css">
-        .select2-container--default .select2-selection--single .select2-selection__rendered{
-            font-size: 12px;
-        }
-        text{
-            font-family: 'Lato', sans-serif;
-        }
-    </style>
-    {{ form.media }}
-    {% block css %}
-    {% endblock %}
 </head>
+
+
+
+
+
+
+
 
 
 <body>
 
-
-
-
   <div class="container-fluid">
-
     <div class="row">
       <div class="col-sm-2">
       {% block sidebar %}
       <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="">Municipios</a></li>
-          <li><a href="">Departamentos</a></li>
-          <li><a href="">Ciudades</a></li>
-          <li><a href="">Paises</a></li>
       </ul>
      {% endblock %}
       </div>
@@ -75,8 +36,8 @@
       {% block content %}{% endblock %}
       </div>
     </div>
-
   </div>
+
 
 </body>
 </html>

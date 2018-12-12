@@ -1,8 +1,129 @@
 {% extends 'base_generic.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+
+{% block titulo %}
+    {% if object %}
+        Editar {{ tipo_usuario }}
+    {% else %}
+        Registrar {{ tipo_usuario }}
+    {% endif %}
+     - Deporte Social Comunitario
+{% endblock %}
+
+{% block titulo_contenido %}
+    {% if object %}
+        Editar {{ tipo_usuario }}
+    {% else %}
+        Registrar {{ tipo_usuario }}
+    {% endif %}
+{% endblock %}
+
+{% block botones_panel %}
+    <a href="#"  onclick="history.back()" class="btn btn-warning btn-xs "><i class="fa fa-arrow-left"></i> Regresar</a>
+{% endblock %}
+
+
+
+
+{% block contenido_panel %}
+    <form id ="usuario-form" class="form-vertical" enctype="multipart/form-data" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.username show_help=False %}
+                        </div>
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.first_name %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.last_name %}
+                        </div>
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.email %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% if not object %}
+                            <div class="col-lg-6">
+                                {% bootstrap_field form.password %}
+                            </div>
+                        {% endif %}
+                        {% if not object %}
+                            <div class="col-lg-6">
+                               {% bootstrap_field form.confirm_password %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.tipo_id %}
+                        </div>
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.identificacion %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.fecha_nacimiento %}
+                        </div>
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.foto %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.telefono %}
+                        </div>
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.direccion %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {% bootstrap_field form.genero %}
+                        </div>
+                    </div>
+                    {% block campos_adicionales %}
+                    {% endblock %}
+                </div>
+                <div class="row">
+                    <button class="btn btn-primary pull-right" type="submit">
+                        <i class="fa fa-save"></i>
+                        {% if object %}
+                            Guardar cambios
+                        {% else %}
+                            Registrar
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+
+
 
 {% block content %}
-	<h1>Campos de Municipio</h1>
+	<h1>Campos de Municipioo</h1>
 	<form method="POST" class="post-form">{% csrf_token %}{{ form.as_p }}
 		<button type="Submit" class="save btn btn-default">Guardar</button>
 	</form>
 {% endblock %}
+
+
+
+{% block js %}
+    {% if object %}
+        <script type="text/javascript" src="{% static 'js/validaciones/gestion_usuarios/edicion-usuario-validations.js'%}"></script>
+    {% else %}
+        <script type="text/javascript" src="{% static 'js/validaciones/gestion_usuarios/registro-usuario-validations.js'%}"></script>
+    {% endif %}
+{% endblock js %}
