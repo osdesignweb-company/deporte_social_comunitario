@@ -1,51 +1,59 @@
-from django.shortcuts import render
-from django.views import generic 
-from .forms import MunicipioFormulario, PerfilUsuarioFormulario
+from django.shortcuts import render, redirect
+from django.views import generic
+from .forms import PersonasFormularios, UsuariosFormularios
+from django.http import HttpResponse
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic.edit import FormView
+from django.contrib.auth import login 
+from django.http.response import HttpResponseRedirect
+
 # Create your views here.
 
-from .models import *
-
 def index(request):
-	#Genera contadores de algunos objetos principales
-	num_municipios = Municipio.objects.all().count()
-	num_Departamento = Departamento.objects.all().count()
-	num_Ciudad = Ciudad.objects.all().count()
-	num_Pais = Pais.objects.all().count()
-	#num_usuarios = usuarios.count()
-
-	#renderizacion del HTML index.html con los datos en la variable contexto
-	return render(
-		request,
-		'index.html',
-		context = {'num_municipios':num_municipios,
-					'num_Departamento':num_municipios,
-					'num_Ciudad':num_municipios,
-					'num_Pais':num_municipios},	
-	)
-
-def Municipio_new(request):
-	form=MunicipioFormulario()
-	return render(request, 'Municipio_list.html',{'form':form})
+	return render(request,'index.html')
 
 
-
-def PerfilUsuario_view(request):
-	form = PerfilUsuarioFormulario()
-	return render(request, 'Perfil_usuario.html',{'form':form})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def Personas_view(request):
+	if request.method == "POST":
+		form = PersonasFormularios(request.POST)
+		if form.is_valid():
+			post = form.save(commit=False)
+			post.save()
+			return redirect("/usuarios/")
 	
+
+	else:
+		form = PersonasFormularios()
+	return render(request,'Personas.html',{'form':form})
+
+def Usuarios_view(request):
+	if request.method == "POST":
+		form = UsuariosFormularios(request.POST)
+		if form.is_valid():
+			post = form.save(commit=False)
+			post.save()
+			return redirect("/usuarios/")
+		#else:
+		#	return HttpResponse('Datos no validos')
+
+	else:
+		form = UsuariosFormularios()
+	return render(request,'Usuarios.html',{'form':form})
+
+
+
+
+def login(request):
+	return render(request,'login.html')
+	
+	
+
+
+
+
+
+# def index_dashboard(request)
+# 	return render(request,'base_dashboard.html')
+

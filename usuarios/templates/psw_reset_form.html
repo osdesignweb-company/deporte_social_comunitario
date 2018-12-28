@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block titulo %}
+    Recuperar contraseña - Sistema Nacional de Monitoreo de la Actividad Física
+{% endblock %}
+
+{% block miga_pan %}
+    <li><a href="#">Inicio</a></li>
+    <li class="active">Recuperar contraseña</li>
+{% endblock %}
+
+{% block titulo_panel %}
+    Recuperar contraseña
+{% endblock %}
+
+{% block botones_panel %}
+    <a href="{% url 'login' %}" class="btn btn-warning btn-xs "><i class="fa fa-arrow-left"></i> Regresar</a>
+{% endblock %}
+
+{% block css %}
+    {{ form.media }}
+{% endblock css %}
+
+{% block contenido_panel %}
+
+    <div class="col-md-10 col-md-offset-1">
+        <form action="" method="POST" class="form-horizontal"  id="reset-password-form">{% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button "Recuperar contraseña" button_type="submit" button_class="btn-primary btn pull-right"%}
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/validaciones/gestion_usuarios/reset-password-form-validations.js'%}"></script>
+{% endblock js %}

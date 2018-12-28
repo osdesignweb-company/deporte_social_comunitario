@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['157.230.4.18']
 INSTALLED_APPS = [
     'bootstrap3',
     'datetimewidget',
+    'bootstrap_datepicker',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -130,13 +131,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, '..', "static"),
+# )
+# STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_collected')
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+# MEDIA_URL = '/media/'
+
+
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '..', "static"),
+    os.path.join(BASE_DIR, 'static'),
 )
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static_collected')
-
-MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
-MEDIA_URL = '/media/'
-
-LOGIN_REDIRECT_URL = '/usuarios/Personas'#'/accounts/profile/'
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+#LOGIN_REDIRECT_URL = reverse_lazy('usuarios')
+#'/accounts/profile/'

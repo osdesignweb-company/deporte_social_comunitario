@@ -23,9 +23,10 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^usuarios/', include('usuarios.urls',namespace='usuarios')),
-    #url(r'^usuarios/login$', auth_views.login,{'template_name':'login.html'} ,name='login'),
-    url(r'^noticias/',include('noticias.urls',namespace='noticias'))
+    #url(r'^usuarios/', include('usuarios.urls',namespace='usuarios')),
+    url(r'^', include('usuarios.urls',namespace='usuarios')),
+    #url(r'^usuarios/login$', auth_views.login,{'template_name':'/templates/login.html'} ,name='login'),
+    #url(r'^noticias/',include('noticias.urls',namespace='noticias')),
     #url('', RedirectView.as_view(url='usuarios',permanent=True)),
 ]
 

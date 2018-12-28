@@ -1,123 +1,268 @@
 # coding=utf-8
+
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
+
 from __future__ import unicode_literals
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.core.urlresolvers import reverse
+from datetime import datetime
+import unicodedata
 
 
-TIPO_MONITOR = (
-    (0, 'Líder Institucional'),
-    (1, 'Líder Deportivo Comunitario'),
-    (2, 'Monitor')
-)
+
 
 TIPO_IDENTIDAD = (
-    (0, 'Cédula de Ciudadanía'),
-    (1, 'Cédula de Extranjería'),
+    (0,'Cédula de ciudadanía'),
+    (1,'Cédula Extranjera'),
     (2, 'Pasaporte'),
-)
+    (3, 'Tarjeta de identidad'),
+    )
 
 TIPO_GENERO = (
     (1, 'Femenino'),
-    (2, 'Masculino'),
-)
- 
+    (2, 'Masculino'))
+
+MES = (
+    (1,'Enero'),
+    (2,'Febrero'),
+    (3,'Marzo'),
+    (4,'Abril'),
+    (5,'Mayo'),
+    (6,'Junio'),
+    (7,'Julio'),
+    (8,'Agosto'),
+    (9,'Septiembre'),
+    (10,'Octubre'),
+    (11,'Noviembre'),
+    (12,'Diciembre')
+    )
+
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=80)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.BooleanField()
+    username = models.CharField(unique=True, max_length=30)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=254)
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+        verbose_name='Control login'
+        verbose_name_plural='Control logins'
+
+
+class AuthUserGroups(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
+class Departamentos(models.Model):
+    id_departamento = models.TextField(primary_key=True)
+    id_pais = models.TextField()
+    departamento = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'departamentos'
+        verbose_name='Departamento'
+        verbose_name_plural='Departamentos'
+
+
+
+
+class DirectorioPersonas(models.Model):
+    id_directorio = models.AutoField(primary_key=True)
+    id_persona = models.ForeignKey('Personas', models.DO_NOTHING, db_column='id_persona')
+    imagen = models.TextField(blank=True, null=True)
+    correo = models.TextField(blank=True, null=True)
+    direccion = models.TextField(blank=True, null=True)
+    celular = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    telefono_fijo = models.DecimalField(db_column='telefono fijo', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    extension = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'directorio_personas	'
+        verbose_name='Directorio Personas'
+        verbose_name_plural ='Directorio Personas'
+
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.SmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+        verbose_name='Administrador'
+        verbose_name_plural='Administrador'        
+
+
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
+
+
 class Municipio(models.Model):
-	nombre = models.CharField(max_length=255,verbose_name='nombre')
-	codigo = models.CharField(max_length=10,null=True, verbose_name='código')
-	latitud = models.FloatField(null=True)
-	longitud = models.FloatField(null=True)
+    id_municipio = models.TextField(primary_key=True)
+    id_departamento = models.ForeignKey(Departamentos, models.DO_NOTHING, db_column='id_departamento')
+    municipio = models.TextField()
 
-	def __str__(self):
-		return self.nombre
-
-
-class Departamento(models.Model):
-	nombre = models.CharField(max_length=255,verbose_name='nombre')
-	codigo = models.CharField(max_length=10,null=True, verbose_name='código')
-	latitud = models.FloatField(null=True)
-	longitud = models.FloatField(null=True)
-
-	def __str__(self):
-		return self.nombre
+    class Meta:
+        managed = False
+        db_table = 'municipio'
+        verbose_name='Municipio'
+        verbose_name_plural='Municipios'
 
 
-class Ciudad(models.Model):
-	nombre = models.CharField(max_length=255,verbose_name='nombre')
-	departamento = models.ForeignKey(Departamento)
-	codigo = models.CharField(max_length=10,null=True, verbose_name='código')
-	latitud = models.FloatField(null=True)
-	longitud = models.FloatField(null=True)
+class Paises(models.Model):
+    id_pais = models.TextField(primary_key=True)
+    pais = models.TextField()
 
-	def __str__(self):
-		return "%s (%s)" % (self.nombre,self.departamento.nombre)
+    class Meta:
+        managed = False
+        db_table = 'paises'
+        verbose_name='Pais'
+        verbose_name_plural ='Paises'
 
+class Personas(models.Model):
+    id_persona = models.BigIntegerField(primary_key=True,verbose_name='Cedula de ciudadanía')
+    tipo_documento = models.SmallIntegerField(choices=TIPO_IDENTIDAD)
+    nombre = models.TextField(max_length=25)
+    primer_apellido = models.TextField()
+    segundo_apellido = models.TextField()
+    fecha_nacimiento = models.DateField(blank = False)
+    sexo = models.SmallIntegerField(choices=TIPO_GENERO)
+    creado = models.DateTimeField(blank = False) 
+    pais_nacimiento = models.ForeignKey(Paises, models.DO_NOTHING, db_column='pais_nacimiento')
+    #pais_nacimiento = models.ForeignKey(Paises, models.DO_NOTHING, choices = PAIS,db_column='pais_nacimiento')
 
-
-class Pais(models.Model):
-	nombre = models.CharField(max_length=255,verbose_name='nombre')
-	codigo = models.CharField(max_length=10,null=True,verbose_name='código')
-	departamento = models.ForeignKey(Departamento)
-	municipio = models.ForeignKey(Municipio)
-	ciudad = models.ForeignKey(Ciudad)
-
-	def __str__(self):
-		return "%s %s %s %s" % (self.nombre, self.ciudad.nombre ,self.departamento.nombre,self.municipio.nombre)
-
-
-class PerfilUsuario(models.Model):
-	tipo_id=models.IntegerField(verbose_name='Tipo de identificación',choices=TIPO_IDENTIDAD)
-	identificacion=models.CharField(max_length=100,verbose_name='Número de identificación',unique=True)
-	nombre=models.CharField(max_length=100,verbose_name='Nombre')
-	primer_apellido=models.CharField(max_length=100,verbose_name='Primer Apellido')
-	segundo_apellido = models.CharField(max_length=100,verbose_name='Segundo Apellido')
-	genero = models.IntegerField(verbose_name="Género",choices=TIPO_GENERO)
-	lugar_nacimiento = models.ForeignKey(Pais)
-	fecha_nacimiento = models.DateField(verbose_name='Fecha de nacimiento')
-	creado = models.DateTimeField(auto_now_add=True)
-	
-	def __str__(self):
-		return self.nombre
+    class Meta:
+        #managed = False
+        db_table = 'personas'
+        verbose_name='Persona'
+        verbose_name_plural ='Personas'
 
 
-class Directorio(models.Model):
-	codigo = models.CharField(max_length=10, null=True,verbose_name='código')
-	identificacion = models.CharField(max_length=100, verbose_name='Número de identificación',unique=True)
-	telefono = models.CharField(max_length=25,verbose_name="Teléfono")
-	#foto = models.ImageField(upload_to=file_name,blank=True)
-	foto = models.CharField(max_length=100,verbose_name='Foto')
-	email = models.CharField(max_length=100,verbose_name='Correo electrónico')
-	direccion = models.CharField(max_length=100,verbose_name='Dirección')
-	cel = models.FloatField(null=True,verbose_name='Celular')
-	Tel_fijo = models.FloatField(verbose_name='Teléfono fijo')
-	Ext = models.FloatField(verbose_name='Extensión')
+class Usuarios(models.Model):
+    id_usuarios = models.AutoField(primary_key=True)
+    id_persona = models.ForeignKey(Personas, models.DO_NOTHING, db_column='id_persona', verbose_name='Cedula de ciudadanía')
+    password = models.TextField()
+    rol = models.TextField()
+    inicio_contrato = models.DateField(blank = False)
+    fin_contrato = models.DateField(blank = False)
+    contrato = models.TextField()
+    activo = models.BooleanField()
 
-	def __str__(self):
-		return self.identificacion
+    class Meta:
+        managed = False
+        db_table = 'usuarios	'
+        verbose_name='Usuario'
+        verbose_name_plural ='Usuarios'
 
-class usuarios(models.Model):
-	codigo = models.CharField(max_length=10, null=True,verbose_name='código')
-	tipo_usuario = models.CharField(max_length=100)
-	identificacion = models.CharField(max_length=100,verbose_name='Número de identificación', unique=True)
-	passw = models.CharField(max_length=50,verbose_name='Password')
-	rol = models.CharField(max_length=20,verbose_name='Rol')
-	estado = models.BooleanField(default=True)
-
-	def __str__(self):
-		return self.rol
-
-
-
-
-
+class ReporteUsuario(models.Model):
+    #fecha_creacion = models.DateField()
+    mes = models.SmallIntegerField(choices=MES)
+    nombre_proyecto = models.TextField(max_length=50,blank=True, null=True)
+    nombre_operador = models.TextField(max_length=50)
+    nombre_diligenciador = models.TextField(max_length=50)
+    Cargo = models.TextField(max_length=50)
+    tipo_documento = models.SmallIntegerField(choices=TIPO_IDENTIDAD)
+    Num_contrato = models.SmallIntegerField()
+    tel = models.TextField(max_length=15)
+    email = models.TextField(max_length=15)
+    #departamento = models.ForeignKey(Departamentos, models.DO_NOTHING,db_column='departamento')
 
 
-
-
-
-
-
-
-
-
+    class Meta:
+        managed =True
+        db_table = 'usuarios_reporteusuario'
+        verbose_name='Reporte Usuario'
+        verbose_name_plural = 'Reporte Usuarios'
 

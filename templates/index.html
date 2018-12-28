@@ -1,0 +1,703 @@
+{% extends 'base.html'%}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+
+
+{% block miga_pan %}
+	 <!-- <li><a href="#">Inicio</a></li>
+    <li><a href="#">Noticias</a></li>
+    <li class="active">Lista</li> -->
+{% endblock miga_pan %}
+
+
+
+{% block js %}
+   <script type="text/javascript">
+        var idTabla = 'data-table';
+    </script>
+    <script src="{% static 'js/datatables/init_datatable.js' %}"></script>
+    
+    <script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    // Next/previous controls
+    function plusSlides(n) {
+    showSlides(slideIndex += n);
+    }
+    
+    // Thumbnail image controls
+    function currentSlide(n) {
+    showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("demo");
+    var captionText = document.getElementById("caption");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex=slides.length} for (i=0; i < slides.length; i++) { slides[i].style.display="none" ; } for (i=0;
+        i < dots.length; i++) { dots[i].className=dots[i].className.replace(" active", "" ); }
+        slides[slideIndex-1].style.display="block" ; dots[slideIndex-1].className +=" active" ; captionText.innerHTML=dots[slideIndex-1].alt;
+        }
+    </script>
+{% endblock %}
+
+{% block css %}
+    {{ form.media }}
+    <link href="{{STATIC_URL}}plugins/croppic/croppic.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}plugins/jquery-tag-it/css/jquery.tagit.css" rel="stylesheet">
+    <link href="{{STATIC_URL}}plugins/croppic/estilos_personalizados.css" rel="stylesheet">
+{% endblock %}
+
+{% block cuerpo %}
+
+<div class="deportes-mas clearfix">
+   <img src="{% static 'img/deportes1.png' %}">
+</div>
+
+<!--sección de noticias-->
+	<div class="panel panel-success panel-center">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                {% block botones_panel %}
+                    <!-- <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger"><i class="fa fa-times"></i></a> -->                      
+                {% endblock botones_panel %}
+            </div>
+            <h4 class="panel-title" id="noticias">
+                {% block titulo_panel %}
+                    NOTICIAS
+                {% endblock titulo_panel %}
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    {% block contenido_panel %}
+                        <!-- Container for the image gallery -->
+                        <div class="container-noticias">
+                        
+                            <!-- Full-width images with number text -->
+                            <div class="mySlides">
+                                <div class="numbertext">1 / 6</div>
+                                <img src="{% static 'img/depor1.jpeg' %}"
+                                 style="width:100%">
+                            </div>
+                        
+                            <div class="mySlides">
+                                <div class="numbertext">2 / 6</div>
+                                <img src="{% static 'img/depor2.jpeg' %}" style="width:100%">
+                            </div>
+                        
+                            <div class="mySlides">
+                                <div class="numbertext">3 / 6</div>
+                                <img src="{% static 'img/depor3.jpeg' %}" style="width:100%">
+                            </div>
+                        
+                            <div class="mySlides">
+                                <div class="numbertext">4 / 6</div>
+                                <img src="{% static 'img/depor4.jpeg' %}" style="width:100%">
+                            </div>
+                        
+                            <div class="mySlides">
+                                <div class="numbertext">5 / 6</div>
+                                <img src="{% static 'img/depor5.jpeg' %}" style="width:100%">
+                            </div>
+                        
+                            <div class="mySlides">
+                                <div class="numbertext">6 / 6</div>
+                                <img src="{% static 'img/depor6.jpeg' %}" style="width:100%">
+                            </div>
+                        
+                            <!-- Next and previous buttons -->
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        
+                            <!-- Image text -->
+                            <div class="caption-container">
+                                <p id="caption"></p>
+                            </div>
+                        
+                            <!-- Thumbnail images -->
+                            <div class="row">
+                                <div class="column">
+                                    <img class="demo cursor" src="{% static 'img/depor1.jpeg' %}" style="width:100%" onclick="currentSlide(1)" alt="noticia1">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="{% static 'img/depor2.jpeg' %}" style="width:100%" onclick="currentSlide(2)" alt="noticia2">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="{% static 'img/depor3.jpeg' %}" style="width:100%" onclick="currentSlide(3)" alt="noticia3">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="{% static 'img/depor4.jpeg' %}" style="width:100%" onclick="currentSlide(4)" alt="noticia4">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="{% static 'img/depor5.jpeg' %}" style="width:100%" onclick="currentSlide(5)" alt="noticia5">
+                                </div>
+                                <div class="column">
+                                    <img class="demo cursor" src="{% static 'img/depor6.jpeg' %}" style="width:100%" onclick="currentSlide(6)" alt="noticia6">
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock contenido_panel %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin sección de noticias-->
+
+    <!--panel indicadores-->
+    <div class="panel panel-success panel-center">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+               
+            </div>
+            <h4 class="panel-title">
+                {% block titulo_panel_2 %}
+                    INDICADORES
+                {% endblock titulo_panel_2 %}
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Programas</span>
+                                <a class="pull-right btn-primary btn-icon btn-circle btn-lg" style="border: 1px solid;  ">
+                                    37
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Departamentos Impactados</span>
+                                <a class="pull-right btn-inverse btn-icon btn-circle btn-lg" style="border: 1px solid;  color: inherit;">
+                                    28
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Municipios Impactados</span>
+                                <a class="pull-right btn-danger btn-icon btn-circle btn-lg" style="border: 1px solid;  ">
+                                    244
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Gestores y Monitores</span>
+                                <a class="pull-right btn-white btn-icon btn-circle btn-lg" style="border: 1px solid;  color: inherit;">
+                                    360
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Grupos Regulares</span>
+                                <a class="pull-right btn-success btn-icon btn-circle btn-lg" style="border: 1px solid;  ">
+                                    1290
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Grupos No Regulares</span>
+                                <a class="pull-right btn-warning btn-icon btn-circle btn-lg" style="border: 1px solid;  ">
+                                    348
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Personas Grupos Regulares</span>
+                                <a class="pull-right btn-primary btn-icon btn-circle btn-lg" style="border: 1px solid; font-size: 12px; ">
+                                    60354
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Personas Grupos No Regulares</span>
+                                <a class="pull-right btn-info btn-icon btn-circle btn-lg" style="border: 1px solid; font-size: 12px; ">
+                                    14026
+                                </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="f-s-14 hijos-tenant">
+                                <span class="f-s-16">Eventos y Acciones para Promover HEVS</span>
+                                <a class="pull-right btn-inverse btn-icon btn-circle btn-lg" style="border: 1px solid;  color: inherit;">
+                                    5091
+                                </a>
+                            </div>
+                        </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin panel indicadores-->
+    
+    <!--panel indicadores de calidad-->
+    <div class="panel panel-success panel-center">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+               
+            </div>
+            <h4 class="panel-title">
+                {% block titulo_panel_3 %}
+                    INDICADORES DE CALIDAD
+                {% endblock titulo_panel_3 %}
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class=" mes-indicador"> ACUMULADO A: Diciembre</div>
+                    <div class="col-md-12" style="padding-top: 10px; padding-bottom: 10px;">
+                        <div class="row">
+                    
+                            <div class="col-md-6">
+                                <div class="f-s-13 hijos-tenant indicador">
+                                    <span class="f-s-16">Porcentaje de personas encuestadas que asisten al programa HEVS</span>
+                                    <a class="btn-success btn" style="border: 1px solid;  ">
+                                        90,64 %
+                                    </a>
+                                </div>
+                            </div>
+                    
+                            <div class="col-md-6">
+                                <div class="f-s-13 hijos-tenant indicador">
+                                    <span class="f-s-16">Total de personas encuestadas</span>
+                                    <a class="btn-warning btn" style="border: 1px solid;  ">
+                                        5728
+                                    </a>
+                                </div>
+                            </div>
+                    
+                            <div class="col-md-6">
+                                <div class="f-s-13 hijos-tenant indicador">
+                                    <span class="f-s-16">Porcentaje de personas encuestadas que sus respuestas coinciden con la información
+                                        del sistema</span>
+                                    <a class="btn-white btn" style="border: 1px solid;  ">
+                                        94,26 %
+                                    </a>
+                                </div>
+                            </div>
+                    
+                            <div class="col-md-6">
+                                <div class="f-s-13 hijos-tenant indicador">
+                                    <span class="f-s-16">Número de personas encuestadas que afirman pertenecer al programa</span>
+                                    <a class="btn-info btn" style="border: 1px solid;  ">
+                                        4926
+                                    </a>
+                                </div>
+                            </div>
+                    
+                            <div class="col-md-6">
+                                <div class="f-s-13 hijos-tenant indicador">
+                                    <span class="f-s-16">Porcentaje de personas encuestadas satisfechas con el programa HEVS</span>
+                                    <a class="btn-danger btn" style="border: 1px solid;  ">
+                                        92,59 %
+                                    </a>
+                                </div>
+                            </div>
+                    
+                            <div class="col-md-6">
+                                <div class="f-s-13 hijos-tenant indicador">
+                                    <span class="f-s-16">Número de personas encuestadas que asistieron al programa en los ultimos 30 días</span>
+                                    <a class="btn-inverse btn" style="border: 1px solid;  ">
+                                        4617
+                                    </a>
+                                </div>
+                            </div>
+                    
+                            <div class="col-md-6">
+                                <div class="f-s-13 hijos-tenant indicador">
+                                    <span class="f-s-16">Porcentaje de personas encuestadas que conocen la información institucional del
+                                        programa HEVS</span>
+                                    <a class="btn-white btn" style="border: 1px solid;  ">
+                                        78,45 %
+                                    </a>
+                                </div>
+                            </div>
+                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin panel indicadores de calidad-->
+
+    <!--panel de programas-->
+    <div class="panel panel-success panel-center">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+    
+            </div>
+            <h4 class="panel-title">
+                {% block titulo_panel_4 %}
+                PROGRAMAS
+                {% endblock titulo_panel_4 %}
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel-body no-padding">
+                        <div id="owl-example" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                    
+                            <div class="owl-wrapper-outer">
+                                <div class="owl-wrapper" style="width: 21164px; left: 0px; display: block; transition: all 800ms ease 0s; transform: translate3d(-8866px, 0px, 0px);">
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-75">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Vaupés (Departamental)</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-43">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Zarandéate Nariño</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-68">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Barranquilla Hevs</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-69">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Bucaramanga Activa Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-72">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Santa Marta Hevs</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-70">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Cúcuta Más Activa "Hágale Toche"</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-56">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Ibagué Activa Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-65">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Sucre Activa Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-54">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Santander Unidos Con Hábitos Y Estilos De Vida Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-71">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Pereira Activa, Saludable E Incluyente</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-74">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Actividad Física Irdet</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-60">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Muévete Cesar</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-66">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Valle Activo Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-55">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Tolima Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-50">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Guaviare Activa Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-49">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Por Tu Salud, Muévete Cordobés</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-42">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Chocó Activo Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-73">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Cundinamarca Siempre Activa</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-44">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Zarandéate Pasto</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-48">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Cauca En Movimiento Hevs</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-63">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Palpita Quindío</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-52">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Meta, Actívate Y Se Feliz</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-51">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Huila Activo Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-45">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">A Moverse Camarita</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-53">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Putumayo En Movimiento</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-57">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Muévete Compa</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-40">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Por Su Salud, Muévase Pués</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-64">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Risaralda Activa Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-59">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Muévete Caldas Por Tu Salud</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-61">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Guajira Viva Y Activa</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-62">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Por Un Norte Activo Y Saludable "Hágale Toche"</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-76">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Bogotá D.C. (Municipal)</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-46">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Boyacá Más Activa</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-47">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Casanare En Movimiento</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-41">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Caquetá Activo Y Saludable</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-58">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Por Tu Salud, Ponte Pilas</p>
+                                        </div>
+                                    </div>
+                                    <div class="owl-item" style="width: 286px;">
+                                        <div class="item">
+                                            <a href="#" data-toggle="modal" data-target="#modal-programa-67">
+                                                <img src="{% static 'img/deportes1.png' %}" alt="Owl Image">
+                                            </a>
+                                            <p class="exo f-s-15">Armenia Un Paraiso Para Moverse</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="owl-controls clickable">
+                                <div class="owl-pagination">
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page active"><span class=""></span></div><!--el script debe cambiar esta clase para mover el carrusel-->
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                    <div class="owl-page"><span class=""></span></div>
+                                </div>
+                                <div class="owl-buttons">
+                                    <div class="owl-prev">Anterior</div>
+                                    <div class="owl-next">Siguiente</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--fin Sección de programas-->
+{% endblock %}
+
